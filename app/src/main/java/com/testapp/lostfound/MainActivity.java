@@ -73,7 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId())
                 {
+                    case R.id.nav_add_post:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container,new AddPostFragment()).commit();
+                        break;
                     case R.id.nav_user_profile:
+                        getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container,new ProfileFragment()).commit();

@@ -31,14 +31,20 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     private void sendPasswordResetMail()    {
-        TextInputLayout email = findViewById(R.id.email);
+        final TextInputLayout email = findViewById(R.id.email);
         String sEmail = email.getEditText().getText().toString().trim();
+
+        if(sEmail.isEmpty())    {
+            Toast.makeText(this, "Please enter an email.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         FirebaseAuth.getInstance().sendPasswordResetEmail(sEmail)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
+                            email.getEditText().setText("");
                             Toast.makeText(ForgotPassword.this, "Password reset email has been sent\nPlease check your inbox.", Toast.LENGTH_SHORT).show();
                         }
                         else {

@@ -42,6 +42,12 @@ dependencies {
     //Smooth ProgressBar
     implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
 
+    //Spot Dialog
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+
+    //Dots Indicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
+
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     testImplementation 'junit:junit:4.12'
