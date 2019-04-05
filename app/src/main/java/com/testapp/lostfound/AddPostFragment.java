@@ -19,11 +19,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -95,6 +97,8 @@ public class AddPostFragment extends Fragment implements View.OnClickListener,Ea
 
         initializeViewPager();
 
+        isProfileCompleted();
+
         return view;
     }
 
@@ -162,6 +166,10 @@ public class AddPostFragment extends Fragment implements View.OnClickListener,Ea
     }
 
     private void uploadPhotoAndPost() {
+
+        if (!isProfileCompleted())   {
+            return;
+        }
 
         final String description;
 
@@ -392,6 +400,26 @@ public class AddPostFragment extends Fragment implements View.OnClickListener,Ea
             case AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE:
                 break;
         }
+    }
+
+    private boolean isProfileCompleted()    {
+        DocumentReference profileDetail = FirebaseFirestore.getInstance().document("/profile_details/" +
+                FirebaseAuth.getInstance().getCurrentUser().getUid());
+        profileDetail.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())   {
+                    ProfileObject profile = documentSnapshot.toObject(ProfileObject.class);
+                    if(profile.getFirstName().isEmpty() || profile.getLastName().isEmpty() || profile.getFbProfileUrl().isEmpty() || profile.getProfilePhotoUrl().isEmpty())    {
+                        makeToast("Please complete your profile to post!");
+                    }
+                }
+                else {
+                    makeToast("Please complete your profile to post!");
+                }
+            }
+        });
+        return false;
     }
 
     private Bitmap scaledBitmap(Bitmap realImage, Float maxImageSizeInKb, boolean filter) {

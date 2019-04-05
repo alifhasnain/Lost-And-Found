@@ -307,6 +307,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         profileObject.setFbProfileUrl(fbUrl);
         profileObject.setAboutMe(about);
         profileObject.setProfilePhotoUrl(mPhotoUrl);
+        profileObject.seteMail(mCurrentUser.getEmail());
 
         mProfileDocRef.set(profileObject).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

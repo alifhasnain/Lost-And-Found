@@ -1,5 +1,7 @@
 package com.testapp.lostfound;
 
+import com.google.firebase.firestore.Exclude;
+
 public class ProfileObject {
     private String FirstName;
     private String LastName;
@@ -8,12 +10,14 @@ public class ProfileObject {
     private String fbProfileUrl;
     private String aboutMe;
     private String profilePhotoUrl;
+    private String uID;
+    private String eMail;
 
     public ProfileObject() {
 
     }
 
-    public ProfileObject(String firstName, String lastName, String university, String department, String fbProfileUrl, String aboutMe, String profilePhotoUrl) {
+    public ProfileObject(String firstName, String lastName, String university, String department, String fbProfileUrl, String aboutMe, String profilePhotoUrl,String eMail) {
         FirstName = firstName;
         LastName = lastName;
         this.university = university;
@@ -21,6 +25,7 @@ public class ProfileObject {
         this.fbProfileUrl = fbProfileUrl;
         this.aboutMe = aboutMe;
         this.profilePhotoUrl = profilePhotoUrl;
+        this.eMail = eMail;
     }
 
     public String getFirstName() {
@@ -77,5 +82,22 @@ public class ProfileObject {
 
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         this.profilePhotoUrl = profilePhotoUrl;
+    }
+
+    @Exclude
+    public String getuID() {
+        return uID;
+    }
+
+    public void setuID(String uID) {
+        this.uID = uID;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 }

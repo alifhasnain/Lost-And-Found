@@ -54,6 +54,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         mAuth.removeAuthStateListener(mAuthStateListener);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
     private void setOnClickListeners() {
         findViewById(R.id.sign_up).setOnClickListener(this);
         findViewById(R.id.sign_in).setOnClickListener(this);

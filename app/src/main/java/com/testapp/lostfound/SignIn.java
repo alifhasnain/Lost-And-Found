@@ -51,6 +51,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         mAuth.removeAuthStateListener(mAuthStateListener);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
     private void initializeVariables() {
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.smooth_progress_bar);
@@ -68,10 +74,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
                                 Toast.makeText(SignIn.this, "Verification Email sent.\nYou can sing in once you are verified!", Toast.LENGTH_SHORT).show();
+                                mAuth.signOut();
                             }
                         }
                     });
                 }
+                progressBar.setVisibility(View.GONE);
             }
         };
     }
