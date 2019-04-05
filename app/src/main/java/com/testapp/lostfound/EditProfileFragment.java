@@ -181,6 +181,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             mFbProfileUrl.getEditText().setText(mUserProfile.getFbProfileUrl());
             mDepartment.getEditText().setText(mUserProfile.getDepartment());
             mAbout.getEditText().setText(mUserProfile.getAboutMe());
+            mPhotoUrl = mUserProfile.getProfilePhotoUrl();
         }
         catch (Exception e) {
             e.printStackTrace();

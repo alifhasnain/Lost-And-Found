@@ -82,6 +82,8 @@ public class AddPostFragment extends Fragment implements View.OnClickListener,Ea
 
     private SmoothProgressBar mSmoothProgressBar;
 
+    ProfileObject mProfile;
+
     public AddPostFragment() {
         // Required empty public constructor
     }
@@ -167,7 +169,8 @@ public class AddPostFragment extends Fragment implements View.OnClickListener,Ea
 
     private void uploadPhotoAndPost() {
 
-        if (!isProfileCompleted())   {
+        if(mProfile.getFirstName().isEmpty() || mProfile.getLastName().isEmpty() || mProfile.getFbProfileUrl().isEmpty() || mProfile.getProfilePhotoUrl().isEmpty())    {
+            makeToast("Please complete your profile to post!");
             return;
         }
 
@@ -409,8 +412,8 @@ public class AddPostFragment extends Fragment implements View.OnClickListener,Ea
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists())   {
-                    ProfileObject profile = documentSnapshot.toObject(ProfileObject.class);
-                    if(profile.getFirstName().isEmpty() || profile.getLastName().isEmpty() || profile.getFbProfileUrl().isEmpty() || profile.getProfilePhotoUrl().isEmpty())    {
+                    mProfile = documentSnapshot.toObject(ProfileObject.class);
+                    if(mProfile.getFirstName().isEmpty() || mProfile.getLastName().isEmpty() || mProfile.getFbProfileUrl().isEmpty() || mProfile.getProfilePhotoUrl().isEmpty())    {
                         makeToast("Please complete your profile to post!");
                     }
                 }

@@ -159,6 +159,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                     if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                         Toast.makeText(SignIn.this, "Invalid Details!", Toast.LENGTH_SHORT).show();
                     }
+                    else {
+                        Toast.makeText(SignIn.this, "Please check your info.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
