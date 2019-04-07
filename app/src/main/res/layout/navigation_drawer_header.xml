@@ -4,19 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="176dp"
     android:padding="20dp"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/dp"
-        android:layout_width="110dp"
-        android:layout_height="110dp"/>
     <TextView
-        android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/lost_and_found"
+        android:textColor="@color/white"
+        android:textSize="25sp"/>
 </LinearLayout>

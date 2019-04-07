@@ -16,6 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/coiny"
         android:gravity="center"
         android:text="@string/lost_and_found"
         android:textColor="@color/white"

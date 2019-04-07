@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawer;
 
+    Toolbar mToolBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         initializeVariables();
 
         if(savedInstanceState==null)    {
+            mToolBar.setTitle("Profile");
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container,new ProfileFragment()).commit();
@@ -74,32 +77,41 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.nav_add_post:
+                        mToolBar.setTitle("Add Post");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container,new AddPostFragment()).commit();
                         break;
                     case R.id.nav_user_profile:
+                        mToolBar.setTitle("Profile");
                         getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container,new ProfileFragment()).commit();
                         break;
                     case R.id.nav_lost:
+                        mToolBar.setTitle("Lost");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container,new LostFragment()).commit();
                         break;
                     case R.id.nav_found:
+                        mToolBar.setTitle("Found");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container,new FoundFragment()).commit();
                         break;
                     case R.id.nav_user_posts:
+                        mToolBar.setTitle("My Posts");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container,new MyPostsFragment()).commit();
                         break;
                     case R.id.nav_about_dev:
+                        mToolBar.setTitle("About Developers");
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container,new AboutDevs()).commit();
                         break;
                     case R.id.nav_sign_out:
                         FirebaseAuth.getInstance().signOut();
@@ -114,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDrawerAndToolbar() {
         mDrawer = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        mToolBar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolBar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawer,mToolBar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
     }
