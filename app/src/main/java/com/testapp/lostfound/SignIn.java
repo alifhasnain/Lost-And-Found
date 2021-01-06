@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -17,8 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener{
@@ -109,10 +110,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.sign_up:
                 Intent intent = new Intent(SignIn.this, SignUp.class);
-                Pair[] pairs = new Pair[3];
-                pairs[0] = new Pair<View, String>(findViewById(R.id.sign_in), "sign_in_transition");
-                pairs[1] = new Pair<View, String>(findViewById(R.id.sign_up), "sign_up_transition");
-                pairs[2] = new Pair<View,String>(findViewById(R.id.forgot_pass) , "text_view_transition");
+                Pair<View,String>[] pairs = new Pair[3];
+                pairs[0] = new Pair<>(findViewById(R.id.sign_in), "sign_in_transition");
+                pairs[1] = new Pair<>(findViewById(R.id.sign_up), "sign_up_transition");
+                pairs[2] = new Pair<>(findViewById(R.id.forgot_pass) , "text_view_transition");
                 //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignIn.this,btSignIn, ViewCompat.getTransitionName(btSignIn));
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignIn.this, pairs);
                 startActivity(intent, options.toBundle());

@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -17,8 +20,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
@@ -99,7 +100,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private void createNewUser() {
 
         String sEmail = mEmail.getEditText().getText().toString().trim();
-        String sPassword = mPassword.getEditText().getText().toString();
+        String sPassword = mPassword.getEditText().getText().toString().trim();
 
         if (sEmail.isEmpty()) {
             mEmail.setError("An Email is required");
@@ -137,6 +138,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void sendVerificationMail() {
+
         FirebaseUser user = mAuth.getCurrentUser();
 
         user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {

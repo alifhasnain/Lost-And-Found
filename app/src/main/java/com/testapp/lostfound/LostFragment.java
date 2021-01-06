@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -17,10 +21,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import javax.annotation.Nullable;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -93,6 +93,7 @@ public class LostFragment extends Fragment {
                     switch (dc.getType())
                     {
                         case ADDED:
+						//This is wrong i have to correct it
                             mAllPostsList.add(dc.getDocument().toObject(PostObject.class));
                             notifyDataSetChanged();
                             break;
